@@ -1,3 +1,4 @@
+
 /**
  * DNA
  * <p>
@@ -17,7 +18,7 @@ public class DNA {
      */
     public static int STRCount(String sequence, String STR) {
         int[] Map = new int[4];
-        int radix = 4;
+        int radix = 256;
         long prime = 54321102419L;
         int length = STR.length();
         int seqlength = sequence.length();
@@ -31,26 +32,30 @@ public class DNA {
         for (int i = 1; i < length; i++) {
             Pow = (Pow * radix) % prime;
         }
-        for (int i = length; i < seqlength; i++) {
+        for (int i = length; i < seqlength;) {
             if(strHash == seqHash){
-                current++;
-                if(current > longest){
+                while(strHash == seqHash && i + length < seqlength){
+                    current++;
+                    i += length;
+                    seqHash = hash(sequence.substring(i, i + length), radix, length, prime);
+                }
+                if (current > longest) {
                     longest = current;
                 }
-            }
-            else {
                 current = 0;
             }
-            seqHash = (seqHash + prime - sequence.charAt(i - length) * Pow  % prime) % prime;
-            seqHash = (seqHash * radix + sequence.charAt(i)) % prime;
+            if(i < seqlength){
+                seqHash = (seqHash + prime - sequence.charAt(i - length) * Pow  % prime) % prime;
+                seqHash = (seqHash * radix + sequence.charAt(i)) % prime;
+            }
+            i++;
         }
         return longest;
-
     }
     public static long hash(String STR, int radix, int length, long prime) {
-        int hash = 0;
+        long hash = 0;
         for (int i = 0; i < length; i++) {
-            hash = (int) ((hash * radix + STR.charAt(i)) % prime);
+            hash = ((hash * radix + STR.charAt(i)) % prime);
         }
         return hash;
     }
