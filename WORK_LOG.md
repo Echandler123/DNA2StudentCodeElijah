@@ -9,6 +9,7 @@ Name: YOUR NAME HERE
 | Oct 22  | 10:30 - 11:00 pm |                                                                                                                                      I began myRabin-Karp Fingerprint Algorithm using my hash function I created previously. I used the function to hash the str and the sequence to use in the Rabin-Karp Fingerprint Algorithm. |
 | Oct 23  | 9:00 - 10:00 am  | I tried finishing my Rabin-Karp Fingerprint Algorithm. I fixed an index out of bounds error when I try to get my next hash. I created a variable to store the radix exponent. I also did the comparisons to find my current and max counts of the repeats. I still have some sort of calculate error as my answers are incorrect. |
 | Oct 24  | 10:10 - 10:40 am |                                   I add a while loop to count the amount of strs in a row and to increment the current count. I had to fixe a few index out of bounds errors that I was getting from my for loop and hash functions that I fixed I am still getting time outs and incorrect counts for certain some of the tests. |
+| Oct 30  |  10:00 - 10:30   |                                                                                                                                                                                                                                                                                                                                   |
 
 
 To add a new row to the table, click into a cell and then hit shift-enter.
