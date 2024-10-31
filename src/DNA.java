@@ -23,26 +23,36 @@ public class DNA {
         int length = STR.length();
         int seqlength = sequence.length();
         int hash = 0;
+        // Hash of STR
         long strHash = hash(STR, radix, length, prime);
+        // Hash of first letter in str length of the sequence
         long seqHash = hash(sequence.substring(0, length), radix, length, prime);
         int longest = 0;
-        int current = 0;
+        int current;
         long Pow = 1;
+        // Find the highest power for rolling hash
         for (int i = 1; i < length; i++) {
             Pow = (Pow * radix) % prime;
         }
+        // Traverse sequence and find consecutive repeats of STR
         for (int i = 0; i <= seqlength - length; ) {
             current = 0;
+            // Check for consecutive repeats of the STR in the sequence
             while (seqHash == strHash && i <= seqlength - length) {
                 current++;
                 i += length;
                 if (i <= seqlength - length) {
+                    // Update the sequence hash to the next substring of sequence that is STR's
+                    // length
                     seqHash = hash(sequence.substring(i, i + length), radix, length, prime);
                 }
             }
+            // If the current consecutive repeat of the STR in the sequence is longer than the
+            // previous longest consecutive repeat then make it the new longest
             if (current > longest) {
                 longest = current;
             }
+            // If there was no consecutive repeat then update the hash by one character
             if (current == 0 ) {
                 seqHash = (seqHash + prime - sequence.charAt(i) * Pow % prime) % prime;
                 if(i < seqlength - length){
