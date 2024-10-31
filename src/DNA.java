@@ -19,7 +19,7 @@ public class DNA {
         int seqLength = sequence.length();
         // Hash of STR
         long strHash = hash(STR, radix, length, prime);
-        // Hash of first letters in str length of the sequence
+        // Hash of first characters in str length of the sequence
         long seqHash = hash(sequence.substring(0, length), radix, length, prime);
         int longest = 0;
         int current;
