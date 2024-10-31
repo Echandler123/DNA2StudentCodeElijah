@@ -12,10 +12,6 @@
  */
 
 public class DNA {
-
-    /**
-     * TODO: Complete this function, STRCount(), to return longest consecutive run of STR in sequence.
-     */
     public static int STRCount(String sequence, String STR) {
         int radix = 256;
         long prime = 54321102419L;
@@ -23,7 +19,7 @@ public class DNA {
         int seqLength = sequence.length();
         // Hash of STR
         long strHash = hash(STR, radix, length, prime);
-        // Hash of first letter in str length of the sequence
+        // Hash of first letters in str length of the sequence
         long seqHash = hash(sequence.substring(0, length), radix, length, prime);
         int longest = 0;
         int current;
@@ -54,7 +50,7 @@ public class DNA {
             // If there was no consecutive repeat then update the hash by one character
             if (current == 0 ) {
                 seqHash = (seqHash + prime - sequence.charAt(i) * pow % prime) % prime;
-                if(i < seqLength - length){
+                if(i < seqLength - length) {
                     seqHash = (seqHash * radix + sequence.charAt(i + length)) % prime;
                 }
                 i++;
@@ -69,5 +65,4 @@ public class DNA {
         }
         return hash;
     }
-
 }
