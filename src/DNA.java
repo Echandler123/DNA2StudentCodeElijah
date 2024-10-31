@@ -25,30 +25,31 @@ public class DNA {
         int hash = 0;
         long strHash = hash(STR, radix, length, prime);
         long seqHash = hash(sequence.substring(0, length), radix, length, prime);
-
         int longest = 0;
         int current = 0;
         long Pow = 1;
         for (int i = 1; i < length; i++) {
             Pow = (Pow * radix) % prime;
         }
-        for (int i = length; i < seqlength;) {
-            if(strHash == seqHash){
-                while(strHash == seqHash && i + length < seqlength){
-                    current++;
-                    i += length;
+        for (int i = 0; i <= seqlength - length; ) {
+            current = 0;
+            while (seqHash == strHash && i <= seqlength - length) {
+                current++;
+                i += length;
+                if (i <= seqlength - length) {
                     seqHash = hash(sequence.substring(i, i + length), radix, length, prime);
                 }
-                if (current > longest) {
-                    longest = current;
+            }
+            if (current > longest) {
+                longest = current;
+            }
+            if (current == 0 ) {
+                seqHash = (seqHash + prime - sequence.charAt(i) * Pow % prime) % prime;
+                if(i < seqlength - length){
+                    seqHash = (seqHash * radix + sequence.charAt(i + length)) % prime;
                 }
-                current = 0;
+                i++;
             }
-            if(i < seqlength){
-                seqHash = (seqHash + prime - sequence.charAt(i - length) * Pow  % prime) % prime;
-                seqHash = (seqHash * radix + sequence.charAt(i)) % prime;
-            }
-            i++;
         }
         return longest;
     }
